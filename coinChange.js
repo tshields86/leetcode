@@ -24,6 +24,13 @@ Input: coins = [1], amount = 2
 Output: 2
 */
 
+/* 
+Dynamic programming - Bottom up
+
+Time: O(A * C)
+Space: O(A)
+*/
+
 const coinChange = (coins, amount) => {
   coins.sort((a, b) => a - b);
 
