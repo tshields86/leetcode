@@ -15,7 +15,6 @@
 // Brute force - Time: O(n^2), Space: O(1)
 // Keep track of profit, minPrice, & current profit - Time O(n), Space O(1)
 
-
 class Solution {
   public int maxProfit(int[] prices) {
     int profit = 0;
