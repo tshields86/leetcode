@@ -21,19 +21,17 @@ the purpose of space complexity analysis.)
 */
 
 const productExceptSelf = nums => {
-  const productsExceptIndex = [];
+  const productExceptIndex = [];
 
-  let productSoFar = 1;
-  for (let i = 0; i < nums.length; i++) {
-    productsExceptIndex[i] = productSoFar;
+  for (let i = 0, productSoFar = 1; i < nums.length; i++) {
+    productExceptIndex[i] = productSoFar;
     productSoFar *= nums[i];
   }
 
-  productSoFar = 1;
-  for (let i = nums.length - 1; i >= 0; i--) {
-    productsExceptIndex[i] *= productSoFar;
+  for (let i = nums.length - 1, productSoFar = 1; i >= 0; i--) {
+    productExceptIndex[i] *= productSoFar;
     productSoFar *= nums[i];
   }
 
-  return productsExceptIndex;
+  return productExceptIndex;
 };
