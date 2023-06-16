@@ -39,20 +39,21 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
 Since there are two 8's in the top left 3x3 sub-box, it is invalid.
 */
 
-const isValidInputs = array => {
+const isValidInputs = arr => {
   const set = new Set();
-  for (let input of array) {
-    if (input !== '.') {
-      if (set.has(input)) return false;
-      else set.add(input);
-    }
+  for (let item of arr) {
+    if (item === '.') continue;
+    else if (set.has(item)) return false;
+    else set.add(item);
   }
+
   return true;
-};
+}
 
 const isValidRowCol = board => {
   for (let i = 0; i < board.length; i++) {
-    if (!isValidInputs(board[i])) return false;
+    const row = board[i];
+    if (!isValidInputs(row)) return false;
 
     const col = [];
     for (let j = 0; j < board.length; j++) {
@@ -70,17 +71,21 @@ const isValidBox = board => {
       const box = [];
       for (let m = 0; m < 3; m++) {
         for (let n = 0; n < 3; n++) {
-          box.push(board[m + (i * 3)][n + (j * 3)]);
+          box.push(board[(i * 3) + m][(j * 3) + n]);
         }
       }
       if (!isValidInputs(box)) return false;
     }
   }
+
   return true;
 };
 
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
 
 const isValidSudoku = board => {
-  if (!isValidRowCol(board) || !isValidBox(board)) return false;
-  return true;
+  return isValidRowCol(board) && isValidBox(board);
 };
