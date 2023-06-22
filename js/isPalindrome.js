@@ -18,19 +18,18 @@ Output: true
 const isPalindrome = s => {
   if (s.length <= 1) return true;
 
-  let [left, right] = [0, s.length - 1];
-  let lChar, rChar;
+  let [l, r] = [0, s.length - 1];
 
-  while (left < right) {
-    lChar = s[left];
-    rChar = s[right];
+  while (l < r) {
+    const lChar = s[l];
+    const rChar = s[r];
 
-    if (/[^a-z0-9]/gi.test(lChar)) left++;
-    else if (/[^a-z0-9]/gi.test(rChar)) right--;
+    if (/[^a-z0-9]/gi.test(lChar)) l++;
+    else if (/[^a-z0-9]/gi.test(rChar)) r--;
     else if (lChar.toLowerCase() !== rChar.toLowerCase()) return false;
     else {
-      left++;
-      right--;
+      l++;
+      r--;
     }
   }
 
