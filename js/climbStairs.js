@@ -20,6 +20,35 @@ Explanation: There are three ways to climb to the top.
 */
 
 /* 
+Bottom up approach
+Time: O(n)
+Space: O(1)
+*/
+const climbStairs = n => {
+  let prev = 1;
+  let curr = 1;
+  for (let i = 1; i < n; i++) {
+    const temp = prev + curr;
+    prev = curr;
+    curr = temp;
+  }
+  return curr;
+};
+
+/*
+Dynamic Programming
+Time: O(n)
+Space: O(n)
+*/
+const climbStairsDP = n => {
+    const dp = [1, 2];
+    for (let i = 2; i < n; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    return dp[n - 1]
+};
+
+/* 
 Recursive solution
 Time: O(2^n) - Size of recursion tree will be 2^n
 Space: O(n) - The depth of the recursion tree can go upto n
@@ -28,7 +57,6 @@ Recursion with Memoization
 Time: O(n)
 Space: O(n)
 */
-
 const climbStairsRecursive = (n, cache = []) => {
   if (cache[n]) return cache[n];
   if (n === 0) return 1;
@@ -37,21 +65,4 @@ const climbStairsRecursive = (n, cache = []) => {
   cache[n] = climbStairsRecursive(n - 1, cache) + climbStairsRecursive(n - 2, cache);
 
   return cache[n];
-};
-
-/* 
-Bottom up approach
-Time: O(n)
-Space: O(1)
-*/
-
-const climbStairs = n => {
-  let prev = 1;
-  let cur = 1;
-  for (let i = 1; i < n; i ++) {
-    const temp = cur;
-    cur = cur + prev;
-    prev = temp;
-  }
-  return cur;
 };

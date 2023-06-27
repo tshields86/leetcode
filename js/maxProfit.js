@@ -20,12 +20,11 @@ Keep track of profit, minPrice, & current profit - Time O(n), Space O(1)
 const maxProfit = prices => {
   let profit = 0;
   let minPrice = Infinity;
-
   for (let price of prices) {
-    if (price <= minPrice) minPrice = price;
-    let curProfit = price - minPrice
-    profit = Math.max(curProfit, profit);
+    if (price < minPrice) minPrice = price;
+    else if (price - minPrice > profit) {
+      profit = price - minPrice;
+    }
   }
-
   return profit;
 };
