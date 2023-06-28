@@ -17,6 +17,7 @@ Input: nums = [0]
 Output: []
 */
 
+/* Two Pointers */
 const threeSum = nums => {
   nums.sort((a, b) => a - b);
   const len = nums.length;
@@ -44,5 +45,28 @@ const threeSum = nums => {
     }
   }
 
+  return result;
+};
+
+/* Hashset */
+const threeSumSet = nums => {
+  nums.sort((a, b) => a - b);
+  const result = [];
+
+  for (let i = 0; i < nums.length && nums[i] <= 0; i++) {
+    if (i > 0 && nums[i - 1] === nums[i]) continue;
+    const seen = new Set();
+    for (let j = i + 1; j < nums.length; j++) {
+      const compliment = -nums[i] - nums[j];
+
+      if (seen.has(compliment)) {
+        result.push([nums[i], nums[j], compliment]);
+        while (j + 1 < nums.length && nums[j] === nums[j + 1]) {
+          j++;
+        }
+      }
+      seen.add(nums[j]);
+    }
+  }
   return result;
 };
