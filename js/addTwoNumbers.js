@@ -18,20 +18,26 @@ Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
 Output: [8,9,9,9,0,0,0,1]
 */
 
-class ListNode {
-  constructor(val = 0, next = null) {
-    this.val = val;
-    this.next = next;
-  }
-}
-
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
 const addTwoNumbers = (l1, l2) => {
   const list = new ListNode();
-  let head = list;
-  let sum = 0;
+  let node = list;
   let carry = 0;
 
-  while (l1 || l2 || sum > 0) {
+  while (l1 || l2 || carry > 0) {
+    let sum = 0;
+
     if (l1) {
       sum += l1.val;
       l1 = l1.next;
@@ -42,16 +48,15 @@ const addTwoNumbers = (l1, l2) => {
       l2 = l2.next;
     }
 
+    if (carry) sum += carry;
+
     if (sum >= 10) {
       carry = 1;
       sum -= 10;
-    }
+    } else carry = 0;
 
-    head.next = new ListNode(sum);
-    head = head.next;
-
-    sum = carry;
-    carry = 0;
+    node.next = new ListNode(sum);
+    node = node.next;
   }
 
   return list.next;
